@@ -1,0 +1,45 @@
+.links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout {
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.mobileBtn {
+  display: none;
+}
+
+.mobileLinks {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .mobileBtn {
+    display: block;
+    z-index: 2;
+    cursor: pointer;
+  }
+  .mobileLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    position: absolute;
+    background-color: var(--bg);
+    width: 50%;
+    top: 100px;
+    height: calc(100vh - 100px);
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  .links {
+    display: none;
+  }
+}
