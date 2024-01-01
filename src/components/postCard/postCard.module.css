@@ -24,3 +24,12 @@
   transform: rotate(270deg);
   margin: auto;
 }
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.desc {
+  color: gray;
+}

@@ -47,6 +47,10 @@
   flex: 1;
 }
 
+.heroImage {
+  object-fit: contain;
+}
+
 @media screen and (max-width: 1024px) {
   .container {
     flex-direction: column;
