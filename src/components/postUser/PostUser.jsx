@@ -14,7 +14,7 @@ const PostUser = async ({ userId }) => {
   return (
     <div className={styles.container}>
       <span className={styles.title}>Author</span>
-      <span className={styles.name}>{user?.name}</span>
+      <span className={styles.name}>{user.username}</span>
     </div>
   );
 };

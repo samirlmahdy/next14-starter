@@ -7,7 +7,7 @@ const PostCard = ({ post }) => {
       <div className={styles.top}>
         <div className={styles.imgContainer}>
           <Image
-            src="https://images.unsplash.com/photo-1498462440456-0dba182e775b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={post.img}
             className={styles.img}
             fill
             alt="post image"
@@ -20,7 +20,7 @@ const PostCard = ({ post }) => {
         <h1 className={styles.title}>{post.title}</h1>
         <p className={styles.desc}>{post.body}</p>
         <Link
-          href={`/blog/${post.id}`}
+          href={`/blog/${post.slug}`}
           className={styles.link}
         >
           READ MORE
