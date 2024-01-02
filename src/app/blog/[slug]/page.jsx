@@ -2,22 +2,33 @@ import Image from "next/image";
 import styles from "./singlePost.module.css";
 import PostUser from "@/components/postUser/PostUser";
 import { Suspense } from "react";
-import { getPost } from "@/lib/data";
+import { getPost, getUser } from "@/lib/data";
 
-// const getData = async (postId) => {
-//   const res = await fetch(
-//     `https://jsonplaceholder.typicode.com/posts/${postId}`
-//   );
-//   if (!res.ok) throw new Error("Something went wrong!");
-//   return res.json();
-// };
+export const generateMetadata = async ({ params }) => {
+  const { slug: postId } = params;
+  const post = await getPost(postId);
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
+
+// FETCH DATA WITH AN API
+const getData = async (slug) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+  if (!res.ok) throw new Error("Something went wrong!");
+  return res.json();
+};
 
 const SinglePostPage = async ({ params }) => {
-  const { slug: postId } = params;
+  const { slug } = params;
 
-  const post = await getPost(postId);
+  // const post = await getPost(slug);
 
-  // const post = await getData(postId);
+  const post = await getData(slug);
+  const user = await getUser(post.userId);
+
+  console.log(post);
 
   return (
     <div className={styles.container}>
@@ -33,7 +44,7 @@ const SinglePostPage = async ({ params }) => {
         <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.detail}>
           <Image
-            src={post.img}
+            src={user.img ? user.img : "/noavatar.png"}
             alt="hero image"
             width={50}
             height={50}
@@ -47,7 +58,9 @@ const SinglePostPage = async ({ params }) => {
 
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>01.01.2024</span>
+            <span className={styles.detailValue}>
+              {post.createdAt.toString()}
+            </span>
           </div>
         </div>
         <p className={styles.desc}>{post.desc}</p>
